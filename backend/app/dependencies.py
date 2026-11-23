@@ -1,4 +1,5 @@
 import os
+import uuid
 from fastapi import HTTPException, Depends
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from jose import jwt, JWTError
@@ -35,7 +36,11 @@ def get_current_user(
             raise HTTPException(status_code=401, detail="Invalid token")
 
         # Look up the user in the database
-        user = db.query(User).filter(User.id == user_id).first()
+        try:
+            user_uuid = uuid.UUID(str(user_id))
+        except ValueError:
+            raise HTTPException(status_code=401, detail="Invalid token")
+        user = db.query(User).filter(User.id == user_uuid).first()
         if not user:
             raise HTTPException(status_code=401, detail="User not found")
 

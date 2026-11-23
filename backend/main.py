@@ -6,7 +6,6 @@ from app.database import engine, Base
 from app.routers import auth
 from app.models import user
 from app.routers import emails
-from app.routers import ai
 from app.dependencies import get_current_user
 from app.models.user import User
 
@@ -26,12 +25,14 @@ app.add_middleware(
 
 app.include_router(auth.router, prefix="/auth")
 app.include_router(emails.router, prefix="/emails")
-app.include_router(ai.router, prefix="/ai")
 
+#check that the server is running
 @app.get("/health")
 def health_check():
     return {"status": "ok", "message": "Backend is running"}
 
+#returns the profile of whoever is logged in
+#if jwt tokein is missing request is rejected with a 401
 @app.get("/me")
 def get_me(current_user: User = Depends(get_current_user)):
     return {

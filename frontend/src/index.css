@@ -1,1 +1,91 @@
 @import "tailwindcss";
+
+/* Miffy-inspired palette + fonts */
+@theme {
+  --color-coral: #F29191;
+  --color-blush: #F7ADAD;
+  --color-aqua: #B1E5E6;
+  --color-mist: #CCFBFA;
+  --color-petal: #FFF1F1;
+  --color-ink: #1f1f1f;
+  --color-muted: #595959;
+  --font-sans: 'Nunito', system-ui, sans-serif;
+  --font-display: 'Fredoka', system-ui, sans-serif;
+}
+
+@layer base {
+  body {
+    margin: 0;
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    background: #fff;
+  }
+  h1, h2, h3 {
+    font-family: var(--font-display);
+  }
+  input[type='checkbox'] {
+    accent-color: var(--color-coral);
+  }
+}
+
+@layer components {
+  /* Graph-paper backdrop from the inspo pic */
+  .grid-paper {
+    background-color: #fff;
+    background-image:
+      linear-gradient(var(--color-aqua) 2px, transparent 2px),
+      linear-gradient(90deg, var(--color-aqua) 2px, transparent 2px),
+      linear-gradient(var(--color-mist) 1px, transparent 1px),
+      linear-gradient(90deg, var(--color-mist) 1px, transparent 1px);
+    background-size: 96px 96px, 96px 96px, 32px 32px, 32px 32px;
+  }
+
+  /* Crayon-outlined "sticker" card */
+  .sticker {
+    background: #fff;
+    border: 2.5px solid var(--color-ink);
+    border-radius: 24px;
+    box-shadow: 5px 5px 0 var(--color-blush);
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 44px;
+    padding: 0 1.25rem;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.9375rem;
+    color: var(--color-ink);
+    background: #fff;
+    border: 2.5px solid var(--color-ink);
+    border-radius: 999px;
+    cursor: pointer;
+    transition: transform 0.12s ease, box-shadow 0.12s ease;
+  }
+  .btn:hover:not(:disabled) {
+    transform: translateY(-1px);
+    box-shadow: 3px 3px 0 var(--color-blush);
+  }
+  .btn:focus-visible {
+    outline: 3px solid var(--color-coral);
+    outline-offset: 2px;
+  }
+  .btn:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
+
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    padding: 2px 11px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    border: 2px solid var(--color-ink);
+    border-radius: 999px;
+  }
+}

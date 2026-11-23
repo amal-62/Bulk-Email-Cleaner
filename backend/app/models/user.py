@@ -6,6 +6,7 @@ from sqlalchemy.dialects.postgresql import UUID
 from app.database import Base
 import uuid                 # Python's built-in UUID generator
 from datetime import datetime, timezone  # For timestamps
+from sqlalchemy.orm import relationship
 
 # This class represents the 'users' table in PostgreSQL
 # Every attribute that's a Column becomes a column in the table
@@ -17,6 +18,8 @@ class User(Base):
     # default=uuid.uuid4 means Python auto-generates a UUID when creating a new user
     id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
 
+    emails = relationship("Email", back_populates="user")
+  
     # The user's Gmail address — must be unique (no two users with same email)
     # nullable=False means this field is required
     email = Column(String, unique=True, nullable=False)
