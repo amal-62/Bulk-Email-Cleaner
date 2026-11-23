@@ -2,7 +2,10 @@
 
 A web app that helps you clean up your Gmail inbox in bulk. It groups your emails by sender so you can see who fills your inbox, then lets you unsubscribe from senders or send all of their emails to the bin in one click.
 
-![Login page](docs/screenshots/login.png)
+<p>
+  <img src="docs/screenshots/inbox.png" width="48%" alt="Inbox">
+  <img src="docs/screenshots/inbox2.png" width="48%" alt="Inbox with senders selected">
+</p>
 
 ## Features
 
